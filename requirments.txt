@@ -10,3 +10,4 @@ tavily-python
 llama-index-llms-fireworks
 PyPDF2
 beautifulsoup4
+bs4
