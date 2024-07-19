@@ -9,3 +9,4 @@ langchain-fireworks
 tavily-python
 llama-index-llms-fireworks
 PyPDF2
+bs4
