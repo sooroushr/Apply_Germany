@@ -28,14 +28,14 @@ import os
 from llama_index.llms.fireworks import Fireworks
 
 
-os.environ["FIREWORKS_API_KEY"] = "0jDmZZlPaw1VfoqCXbxm7F93Oh9u1bvrPhLRf3fsOQ0zYJRQ"
+os.environ["FIREWORKS_API_KEY"] = "AAxmKPDxj5HRBGnOVvNTAs0opdjtp7A8RZv1QK6UtrYS6lzR"
 
 fix_url = lambda ref, rel: urljoin(ref, rel) if rel[:4] != "http" else rel
 tavily = TavilyClient(api_key="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")
 output_parser = JsonOutputParser()
 llm_split = ChatFireworks(model="accounts/fireworks/models/mixtral-8x22b-instruct", temperature=0)
 llm = Fireworks(
-    model="accounts/fireworks/models/llama-v3-70b-instruct", api_key="0jDmZZlPaw1VfoqCXbxm7F93Oh9u1bvrPhLRf3fsOQ0zYJRQ"
+    model="accounts/fireworks/models/llama-v3-70b-instruct", api_key="AAxmKPDxj5HRBGnOVvNTAs0opdjtp7A8RZv1QK6UtrYS6lzR"
 )
 Settings.embed_model = HuggingFaceEmbedding(model_name="mixedbread-ai/deepset-mxbai-embed-de-large-v1")
 Settings.llm = llm
@@ -47,7 +47,7 @@ class Apply_Extraction:
     def get_tavily_links(self, university, program, keyword):
         query = f"""Masters program {program} {university} {keyword}"""
         print(query)
-        response = self.tavily.search(
+        response = tavily.search(
             query=query,
             search_depth="advanced",
         )
@@ -80,7 +80,7 @@ class Apply_Extraction:
         Important rule: The links must be related to a normal masters program (exluding double degrees or joint programs with other universities or institutions)
         Important rule: You must exlude every link that is not related to any of the aspects.
         """
-        return json.loads(self.llm_split.invoke(prompt.format(links=json.dumps(links), university=university, program=program)).content)
+        return json.loads(llm_split.invoke(prompt.format(links=json.dumps(links), university=university, program=program)).content)
 
 
 
