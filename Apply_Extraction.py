@@ -34,10 +34,13 @@ fix_url = lambda ref, rel: urljoin(ref, rel) if rel[:4] != "http" else rel
 tavily = TavilyClient(api_key="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")
 output_parser = JsonOutputParser()
 llm_split = ChatFireworks(model="accounts/fireworks/models/mixtral-8x22b-instruct", temperature=0)
-llm = Fireworks(
-    model="accounts/fireworks/models/llama-v3-70b-instruct", api_key="AAxmKPDxj5HRBGnOVvNTAs0opdjtp7A8RZv1QK6UtrYS6lzR"
-)
-Settings.embed_model = HuggingFaceEmbedding(model_name="mixedbread-ai/deepset-mxbai-embed-de-large-v1")
+# llm = Fireworks(
+#     model="accounts/fireworks/models/llama-v3-70b-instruct", api_key="AAxmKPDxj5HRBGnOVvNTAs0opdjtp7A8RZv1QK6UtrYS6lzR"
+# )
+llm = ChatFireworks(model="accounts/fireworks/models/llama-v3-70b-instruct", temperature=0)
+
+
+Settings.embed_model = HuggingFaceEmbedding(model_name="intfloat/multilingual-e5-small")
 Settings.llm = llm
 
 class Apply_Extraction:
@@ -154,7 +157,7 @@ class Apply_Extraction:
     
     
     def build_rag(self, links):
-        d = 1024
+        d = 384
         faiss_index = faiss.IndexFlatL2(d)
         vector_store = FaissVectorStore(faiss_index=faiss_index)
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
