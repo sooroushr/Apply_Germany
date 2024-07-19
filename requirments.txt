@@ -1,0 +1,12 @@
+html2text
+llama_index
+llama-index-embeddings-huggingface
+llama-index-embeddings-instructor
+faiss-cpu
+llama-index-vector-stores-faiss
+langchain-core
+langchain-fireworks
+tavily-python
+llama-index-llms-fireworks
+PyPDF2
+bs4

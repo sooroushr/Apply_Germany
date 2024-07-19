@@ -16,5 +16,14 @@ program = st.text_input("Program")
 
 
 if st.button("Search For Information"):
-    aspect_dict = AE.Extract_Aspect(university, program)
-    st.write(str(aspect_dict))
+    AE.Extract_Aspect(university, program)
+    st.write('Rag Built')
+    
+    
+    aspects = ['duration', 'teaching language', 'required german language level', 'required english language level', 'application deadline date', 'minimum required grade']
+    
+    
+    for aspect in aspects:
+        st.write(aspect)
+        st.write( AE.Aspect_extract(aspect) )
+

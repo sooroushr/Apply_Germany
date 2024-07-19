@@ -218,8 +218,11 @@ class Apply_Extraction:
         expanded_links = self.concurrent_exapnd_links(initial_links)
         expanded_links_filtered = self.filter_links(university, program, expanded_links)
         self.rag = self.build_rag(expanded_links_filtered)
-        ask = lambda aspect: self.rag.query("What is the {} of this masters program: {} in {}".format(aspect, program, university)).response
-        aspects = ['duration', 'teaching language', 'required german language level', 'required english language level', 'application deadline date', 'minimum required grade']
+        self.program = program
+        self.university = university
         
-        
-        return {aspect: ask(aspect) for aspect in aspects}
+
+
+    def Aspect_extract(self, aspect):
+        ask = lambda aspect: self.rag.query("What is the {} of this masters program: {} in {}".format(aspect, self.program, self.university)).response
+        return ask(aspect)
