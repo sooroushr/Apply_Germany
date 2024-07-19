@@ -1,3 +1,4 @@
+bs4
 html2text
 llama_index
 llama-index-embeddings-huggingface
@@ -10,4 +11,4 @@ tavily-python
 llama-index-llms-fireworks
 PyPDF2
 beautifulsoup4
-bs4
+
